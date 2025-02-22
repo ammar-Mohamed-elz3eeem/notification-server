@@ -22,7 +22,7 @@ export const checkConnection = async (): Promise<void> => {
       isConnected = true;
     } catch (error) {
       log.error('Connection to elastic search failed. Retrying...');
-      log.log('error', '[NotificationElasticSearch] checkConnection():', error);
+      log.log('error', '[NotificationService::ElasticSearch] checkConnection():', error);
     }
   }
 };

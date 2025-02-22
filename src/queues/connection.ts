@@ -24,7 +24,7 @@ export const createConnection = async (): Promise<Channel | undefined> => {
     closeConnection(connection, channel);
     return channel;
   } catch (error) {
-    log.log('error', '[NotificationQueue] createConnection():', error);
+    log.log('error', '[NotificationService::Queue] createConnection():', error);
     return undefined;
   }
 };
