@@ -145,3 +145,4 @@ Dockerfile.dev
 .npmrc
 Jenkinsfile
 package-lock.json
+build/

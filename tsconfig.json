@@ -1,7 +1,6 @@
 {
   "compilerOptions": {
     "declaration": true,
-    "emitDeclarationOnly": true,
     "importHelpers": true,
     "lib": ["dom", "ES2015"],
     "module": "commonjs",
@@ -31,6 +30,5 @@
       "@notifications/*": ["./src/*"]
     }
   },
-  "include": ["src"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "build"]
 }

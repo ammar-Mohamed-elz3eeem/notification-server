@@ -148,3 +148,4 @@ Dockerfile.dev
 .dockerignore
 .npmrc
 Jenkinsfile
+build/
