@@ -7,6 +7,7 @@ import { config } from '@notifications/config';
 import { healthRoute } from '@notifications/routes';
 import { checkConnection } from '@notifications/elasticsearch';
 import { createConnection } from '@notifications/queues/connection';
+import { consumeAuthEmailMessage, consumeOrderEmailMessage } from '@notifications/queues/email-consumer';
 
 const SERVER_PORT = 4001;
 const log = winstonLogger(
@@ -16,7 +17,9 @@ const log = winstonLogger(
 );
 
 export const startQueues = async (): Promise<void> => {
-  await createConnection();
+  const emailChannel = await createConnection();
+  await consumeAuthEmailMessage(emailChannel);
+  await consumeOrderEmailMessage(emailChannel);
 };
 
 export const startElasticSearch = async (): Promise<void> => {
@@ -31,7 +34,7 @@ export const startServer = (app: Application): void => {
       log.info(`Server running on port ${SERVER_PORT}`);
     })
   } catch (error: any) {
-    log.log('error', '[NotificationServer] startServer():', error);
+    log.log('error', '[NotificationService::Server] startServer():', error);
   }
 };
 
