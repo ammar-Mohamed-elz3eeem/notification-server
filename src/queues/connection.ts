@@ -17,14 +17,19 @@ const closeConnection = (connection: Connection, channel: Channel): void => {
 };
 
 export const createConnection = async (): Promise<Channel | undefined> => {
-  try {
-    const connection = await client.connect(config.RABBITMQ_ENDPOINT || '');
-    const channel = await connection.createChannel();
-    log.info('Notification Queue connected sucessfully...');
-    closeConnection(connection, channel);
-    return channel;
-  } catch (error) {
-    log.log('error', '[NotificationService::Queue] createConnection():', error);
-    return undefined;
+  let isConnected = false;
+
+  while (!isConnected) {
+    try {
+      const connection = await client.connect(config.RABBITMQ_ENDPOINT || '');
+      const channel = await connection.createChannel();
+      log.info('Notification Queue connected sucessfully...');
+      closeConnection(connection, channel);
+      isConnected = true;
+      return channel;
+    } catch (error) {
+      log.log('error', '[NotificationService::Queue] createConnection():', error);
+      return undefined;
+    }
   }
 };

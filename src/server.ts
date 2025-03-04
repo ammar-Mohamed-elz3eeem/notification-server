@@ -17,9 +17,17 @@ const log = winstonLogger(
 );
 
 export const startQueues = async (): Promise<void> => {
-  const emailChannel = await createConnection();
-  await consumeAuthEmailMessage(emailChannel);
-  await consumeOrderEmailMessage(emailChannel);
+  let isConnected = false;
+  while (!isConnected) {
+    try {
+      const emailChannel = await createConnection();
+      await consumeAuthEmailMessage(emailChannel);
+      await consumeOrderEmailMessage(emailChannel);
+      isConnected = true;
+    } catch (error) {
+      continue;
+    }
+  }
 };
 
 export const startElasticSearch = async (): Promise<void> => {
