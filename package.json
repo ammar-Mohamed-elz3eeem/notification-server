@@ -37,7 +37,7 @@
     "tsconfig-paths": "^4.2.0"
   },
   "dependencies": {
-    "@ammar-Mohamed-elz3eeem/protal-lab": "^1.0.0",
+    "@ammar-Mohamed-elz3eeem/protal-lab": "^1.2.1",
     "@elastic/elasticsearch": "^8.17.0",
     "amqplib": "^0.10.5",
     "dotenv": "^16.4.7",
