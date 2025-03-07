@@ -1,4 +1,4 @@
-import client, { Channel, Connection } from 'amqplib';
+import client from 'amqplib';
 import { winstonLogger } from '@ammar-Mohamed-elz3eeem/protal-lab';
 
 import { config } from '@notifications/config';
@@ -9,14 +9,14 @@ const log = winstonLogger(
   'debug'
 );
 
-const closeConnection = (connection: Connection, channel: Channel): void => {
+const closeConnection = (connection: any, channel: any): void => {
   process.once('SIGINT', async () => {
     await channel.close();
     await connection.close();
   });
 };
 
-export const createConnection = async (): Promise<Channel | undefined> => {
+export const createConnection = async (): Promise<any> => {
   let isConnected = false;
 
   while (!isConnected) {
